@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Panel de Control{% endblock %}
+
+{% block content %}
+    <h1>Panel de Administración</h1>
+    
+    <section class="add-user">
+        <h2>Agregar Nuevo Usuario</h2>
+        <form method="POST" action="{{ url_for('agregar_usuario') }}">
+            <input type="text" name="nombre" placeholder="Nombre" required>
+            <input type="email" name="correo" placeholder="Correo" required>
+            <button type="submit">Agregar</button>
+        </form>
+    </section>
+    
+    <section class="user-list">
+        <h2>Usuarios Registrados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.correo }}</td>
+                    <td>
+                        <a href="{{ url_for('eliminar_usuario', id=usuario.id) }}" class="btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        // Scripts específicos para el dashboard
+        document.querySelectorAll('.btn-danger').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                if (!confirm('¿Estás seguro de eliminar este usuario?')) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+{% endblock %}

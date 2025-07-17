@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block content %}
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        
+        <form method="POST" action="{{ url_for('login') }}">
+            <input type="hidden" name="role" value="{{ request.args.get('role', 'user') }}">
+            
+            <div class="form-group">
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="btn">Ingresar</button>
+        </form>
+    </div>
+{% endblock %}

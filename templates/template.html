@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Inicio</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+
+    <main>
+        <div class="main-container">
+            <h1>Registrar un nuevo usuario</h1>
+            <form action="/agregar" method="POST">
+                <input type="text" name="nombre" placeholder="Nombre" required>
+                <input type="email" name="correo" placeholder="Correo electrónico" required>
+                <button type="submit">Agregar Usuario</button>
+            </form>
+        </div>
+        <div class="main-container">
+            <h1>Lista de usuarios registrados</h1>
+            {% for id, nombre, correo in usuarios %}
+            <div class="usuario">
+                <strong>ID:</strong> {{ id }}<br>                
+                <strong>Nombre:</strong> {{ nombre }}<br>
+                <strong>Correo:</strong> {{ correo }}<br>
+                <form action="{{ url_for('eliminar_usuario', id=id) }}" method="post" style="margin-top: 5px;">
+                    <button type="submit" onclick="return confirm('¿Seguro que quieres eliminar este usuario?')">
+                        Eliminar
+                    </button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
+

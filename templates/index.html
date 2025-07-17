@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+    <h1>¡Bienvenido!</h1><br>
+    <h2>Inicia sesión</h2><br>
+    
+    {% if 'user_id' not in session %}
+        <div class="auth-options">
+            <a href="{{ url_for('login') }}" class="btn">Iniciar Sesión</a>
+        </div>
+    {% endif %}
+{% endblock %}

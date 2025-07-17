@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Mi Vista{% endblock %}
+
+{% block content %}
+    <h1>Información de Usuarios</h1>
+    
+    <div class="user-grid">
+        {% for usuario in usuarios %}
+        <div class="user-card">
+            <h3>{{ usuario.nombre }}</h3>
+            <p>{{ usuario.correo }}</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block extra_css %}
+    <style>
+        .user-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .user-card {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+    </style>
+{% endblock %}

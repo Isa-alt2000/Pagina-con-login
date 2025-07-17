@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mi Sitio{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Inicio</a>
+        {% if 'user_id' in session %}
+            <span>Hola, {{ session['username'] }}</span>
+            <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+            {% if session['role'] == 'admin' %}
+                <a href="{{ url_for('admin_dashboard') }}">Panel Admin</a>
+            {% else %}
+                <a href="{{ url_for('user_view') }}">Mi Vista</a>
+            {% endif %}
+        {% else %}
+            <a href="{{ url_for('login') }}">Iniciar sesión</a>
+        {% endif %}
+    </nav>
+
+    <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Mi Sitio</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
