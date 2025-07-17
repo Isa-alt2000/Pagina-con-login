@@ -9,7 +9,7 @@
 </head>
 <body>
     <nav>
-        <a href="{{ url_for('home') }}">Inicio</a>
+        <a href="{{ url_for('index') }}">Inicio</a>
         {% if 'user_id' in session %}
             <span>Hola, {{ session['username'] }}</span>
             <a href="{{ url_for('logout') }}">Cerrar sesión</a>
