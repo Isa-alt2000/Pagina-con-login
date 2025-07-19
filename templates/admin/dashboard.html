@@ -6,7 +6,7 @@
     <h1>Panel de Administración</h1>
     
     <section class="add-user">
-        <h2>Agregar Nuevo Usuario</h2>
+        <h1>Agregar Nuevo Usuario</h1>
         <form method="POST" action="{{ url_for('agregar_usuario') }}">
             <input type="text" name="nombre" placeholder="Nombre" required>
             <input type="email" name="correo" placeholder="Correo" required>
@@ -15,7 +15,7 @@
     </section>
     
     <section class="user-list">
-        <h2>Usuarios Registrados</h2>
+        <h1>Usuarios Registrados</h1>
         <table>
             <thead>
                 <tr>
@@ -51,7 +51,7 @@
 
 {% block extra_js %}
     <script>
-        // Scripts específicos para el dashboard
+
         document.querySelectorAll('.btn-danger').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 if (!confirm('¿Estás seguro de eliminar este usuario?')) {
@@ -61,3 +61,4 @@
         });
     </script>
 {% endblock %}
+
