@@ -1,4 +1,3 @@
-/* Variables de color */
 :root {
   --color-primario: #9F2241;
   --color-secundario: #BC955C;
@@ -8,7 +7,6 @@
   --color-borde: #ddd;
 }
 
-/* Reset y estilos base */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -22,7 +20,6 @@ body {
   background-color: var(--color-fondo);
 }
 
-/* Header */
 header {
   width: 100%;
   background-color: var(--color-blanco);
@@ -80,7 +77,7 @@ header {
   letter-spacing: 0.5px;
 }
 
-/* Main content */
+
 main {
   padding: 100px 20px 40px;
   max-width: 1200px;
@@ -101,9 +98,10 @@ main h1 {
   font-size: 24px;
   border-bottom: 2px solid var(--color-primario);
   padding-bottom: 10px;
+} /* Establece un ancho consistente */
+main h2, h3 {
+  color: #9F2241;
 }
-
-/* Formulario */
 form {
   display: flex;
   flex-direction: column;
@@ -112,41 +110,29 @@ form {
   margin: 0 auto;
 }
 
-input[type="text"],
-input[type="email"] {
+.form-group {
+  align-items: center;
+}
+
+.form-group label {
+  min-width: 100px;
+  text-align: right;
+}
+
+
+input{
   padding: 12px 15px;
   border: 1px solid var(--color-borde);
   border-radius: 6px;
   font-size: 16px;
-  transition: all 0.3s ease;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus {
+input:focus{
   outline: none;
   border-color: var(--color-primario);
   box-shadow: 0 0 0 2px rgba(159, 34, 65, 0.2);
 }
 
-button[type="submit"] {
-  background-color: var(--color-primario);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-
-button[type="submit"]:hover {
-  background-color: #8a1d38;
-  transform: translateY(-2px);
-}
-
-/* Lista de usuarios */
 .usuario {
   border: 1px solid var(--color-borde);
   border-radius: 8px;
@@ -166,7 +152,6 @@ button[type="submit"]:hover {
   font-weight: 600;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .header-container {
     flex-direction: column;
@@ -223,10 +208,22 @@ button[type="submit"]:hover {
     font-size: 20px;
   }
   
-  input[type="text"],
-  input[type="email"],
-  button[type="submit"] {
-    padding: 10px 12px;
-    font-size: 14px;
-  }
+}
+.red-button {
+    background-color: var(--color-primario);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.red-button:hover {
+  background-color: #8a1d38;
+  transform: translateY(-2px);
 }

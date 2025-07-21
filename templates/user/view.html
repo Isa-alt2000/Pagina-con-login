@@ -3,12 +3,13 @@
 {% block title %}Mi Vista{% endblock %}
 
 {% block content %}
+
     <h1>Información de Usuarios</h1>
     
     <div class="user-grid">
         {% for usuario in usuarios %}
-        <div class="user-card">
-            <h3>{{ usuario.nombre }}</h3>
+        <div class="user-card"> 
+            <h3 style="color: #9F2241;">{{ usuario.nombre }}</h3>
             <p>{{ usuario.correo }}</p>
         </div>
         {% endfor %}
@@ -26,6 +27,10 @@
             border: 1px solid #ddd;
             padding: 1rem;
             border-radius: 5px;
+            white-space: normal;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            padding: 10px;
         }
     </style>
 {% endblock %}

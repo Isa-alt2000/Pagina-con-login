@@ -1,8 +1,109 @@
 {% extends "base.html" %}
 
-{% block title %}Panel de Control{% endblock %}
+{% block title %}Panel de admin{% endblock %}
 
 {% block content %}
+<style>
+.user-list {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.user-list h1 {
+  color: #000000;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-size: 2rem;
+}
+.user-list table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.user-list th, 
+.user-list td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.user-list th {
+  background-color: #BC955C;
+  color: white;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.user-list tbody tr:hover {
+  background-color: #f5f9fc;
+}
+
+.user-list tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.user-list td:nth-child(1) { /* ID */
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+.user-list td:nth-child(2) { /* Nombre */
+  color: #000000;
+  font-weight: 500;
+}
+
+.user-list td:nth-child(3) { /* Correo */
+  color: #9F2241;
+}
+
+.btn-danger {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #9F2241;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background-color: rgb(90, 34, 28);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-list tbody tr {
+  transition: all 0.2s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .user-list {
+    padding: 1rem;
+  }
+  
+  .user-list th, 
+  .user-list td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+</style>
     <h1>Panel de Administración</h1>
     
     <section class="add-user">
@@ -10,7 +111,7 @@
         <form method="POST" action="{{ url_for('agregar_usuario') }}">
             <input type="text" name="nombre" placeholder="Nombre" required>
             <input type="email" name="correo" placeholder="Correo" required>
-            <button type="submit">Agregar</button>
+            <button type="submit" class="red-button">Agregar</button>
         </form>
     </section>
     
@@ -39,11 +140,19 @@
             </tbody>
         </table>
     </section>
+    <section>
+        <div>
+            <a href="{{ url_for('export_to_csv') }}" class="red-button">
+                Descargar CSV
+            </a>
+        </div>
+    </section>
+
 {% endblock %}
 
 {% block extra_js %}
     <script>
-        // Scripts específicos para el dashboard
+
         document.querySelectorAll('.btn-danger').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 if (!confirm('¿Estás seguro de eliminar este usuario?')) {
@@ -53,3 +162,4 @@
         });
     </script>
 {% endblock %}
+

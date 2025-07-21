@@ -4,11 +4,12 @@
 
 {% block content %}
     <h1>¡Bienvenido!</h1><br>
-    <h2>Inicia sesión</h2><br>
-    
-    {% if 'user_id' not in session %}
+    {% if 'user_id' in session %}
+        <span class="nav-link">Hola, {{ session['username'] }}</span><br>
+        <a class="red-button" href="{{ url_for('logout') }}">Cerrar sesión</a>
+    {% elif 'user_id' not in session %} 
         <div class="auth-options">
-            <a href="{{ url_for('login') }}" class="btn">Iniciar Sesión</a>
+            <a href="{{ url_for('login') }}" class="red-button">Iniciar Sesión</a>
         </div>
     {% endif %}
 {% endblock %}
