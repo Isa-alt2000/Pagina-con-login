@@ -4,21 +4,29 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 import csv
 from io import StringIO
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 app = Flask(__name__)
 app.secret_key = 'clave_secreta_simple'
 app.debug = True
 
 def get_db_connection():
-    return psycopg2.connect(
-        dbname="proyecto_db",
-        user="isa_admin",
-        password="1234",
-        host="localhost",
-        port="5432"
-    )
+    try:
+        conn = psycopg2.connect(
+            dbname=os.getenv("DB_NAME"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            host=os.getenv("DB_HOST"),
+            port=os.getenv("DB_PORT")
+        )
+        return conn
+    except psycopg2.Error as e:
+        print(f"Error al conectar a la base de datos: {e}")
+        return None
 
-#Decoradores de auth
+#Auth si no se tiene rol
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
